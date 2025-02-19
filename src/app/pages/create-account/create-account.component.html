@@ -1,0 +1,37 @@
+<div class="content">
+
+    <form nz-form [formGroup]="form" class="login-form" (ngSubmit)="submitForm()">
+        <div class="contenido">
+            <h2>Formulario de registro</h2>
+            @for (item of formImputs; track $index) {
+                <nz-form-item>
+                    <nz-form-control nzErrorTip={{item.message}} >
+                        <nz-input-group nzPrefixIcon={{item?.preicon}} nzAddOnBefore={{item?.addBefore}} [nzAddOnAfter]="" >
+                            <input 
+                                [type]="statusIconPassword[item.name]? statusIconPassword[item.name]?'text':'password' :item.type"   
+                                nz-input 
+                                formControlName={{item.name}}   
+                                placeholder={{item.label}}
+                                (keypress)="validarNumero($event,item.name)"
+                            />
+                            @if (item.isPassword) {
+                                <span 
+                                nzSuffix 
+                                (click)="togleIconPass(item.name)"
+                                class="eye-icon" 
+                                >
+                                    <nz-icon [nzType]="statusIconPassword[item.name]?'eye':'eye-invisible'"></nz-icon>
+                                </span>
+                            }
+                        </nz-input-group>
+                </nz-form-control>
+            </nz-form-item>
+        }
+        @if (msgError !== undefined) {
+            <nz-alert nzType="error" nzMessage={{msgError}} nzShowIcon></nz-alert>
+        }
+  
+            <button nz-button type="submit" [nzType]="'primary'">Registrar</button>
+        </div>
+    </form>
+</div>

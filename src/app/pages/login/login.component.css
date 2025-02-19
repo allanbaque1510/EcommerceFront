@@ -1,0 +1,66 @@
+
+
+.content-form{
+    border: 1px solid rgb(195, 195, 195);
+    border-radius: 10px;
+    margin-block: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 30px;
+}
+button{
+    width: 100%;
+    padding: 2px 7px;
+    border-radius: 5px;
+}
+nz-form-item{
+    margin-block: 10px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.contenido{
+    text-align: center;
+}
+
+.divider-break {
+    margin-bottom: 14px;
+    line-height: 0;
+    padding-top: 1px;
+    position: relative;
+    text-align: center;
+    top: 2px;
+}
+h5{
+    background-color: #ffffff;
+    color: #3d3d3d;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1;
+    padding: 0 8px 0 7px;
+    position: relative;
+    z-index: 2;
+}
+.divider-break::after {
+    background-color: transparent;
+    border-top: 1px solid #2d3939;
+    content: "";
+    display: block;
+    height: 1px;
+    margin-top: -1px;
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    width: 100%;
+}
+
+.btn-crear{
+    width: 100%;
+}

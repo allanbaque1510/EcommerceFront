@@ -1,0 +1,18 @@
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.contenido{
+    padding: 20px 30px;
+    border: 1px solid rgb(195, 195, 195);
+    border-radius: 10px;
+    margin-block: 10px;
+}
+button{
+    width: 100%;
+    padding: 2px 7px;
+    margin-top: 10px;
+    border-radius: 12px;
+}

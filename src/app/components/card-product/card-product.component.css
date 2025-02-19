@@ -1,0 +1,12 @@
+.cover-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%; /* Asegura que ocupe todo el espacio disponible */
+    width: 100%;
+}
+.cover-container img {
+    max-width: 100%; /* Evita que la imagen sea más grande que el contenedor */
+    max-height: 100%;
+    object-fit: contain; /* Asegura que la imagen se ajuste sin recortarse */
+  }

@@ -1,0 +1,39 @@
+header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(255, 255, 255);
+}
+ul{
+    margin: 0px 20px;
+    list-style: none;
+    font-size: 16px;
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+}
+ul li{
+    cursor: pointer;
+    position: relative;
+    margin-inline: 2px;
+}
+.list-header li::after {
+    content: ''; /* Necesario para crear el pseudo-elemento */
+    position: absolute;
+    bottom: 0; /* Coloca la línea al fondo del contenedor */
+    left: 0;
+    width: 0%; /* Comienza desde el 0% de ancho */
+    height: 0px; /* Establece la altura de la línea */
+    background-color: gray; /* El color de la línea */
+    transition: all 0.2s ease-out; /* Transición de la animación */
+  }
+ul li:hover::after {
+    height: 3px;
+    width: 100%; 
+  }
+#inputSearchProduct{
+    border-radius: 20px;
+    border: 1px solid rgb(10, 82, 92);
+    outline: 1px solid rgb(163, 237, 255);
+    padding: 5px 10px ;
+}
