@@ -92,11 +92,11 @@ export class LoginService {
   saveSession(encryptedData: string){
     this.userData.next(this.cryptDataService.decryptData(encryptedData))
     sessionStorage.setItem('user_session',encryptedData);
-    if (this.router.url === '/register') {
-      this.router.navigate(['/']);
-    }else{
-      // window.location.reload();
-    }
+    const redirectUrl = sessionStorage.getItem('redirectUrl') || '/';
+    sessionStorage.removeItem('redirectUrl');
+    this.router.navigate([redirectUrl]);
+    this.setStatus = false;
+
   }
   clearSession(){
     sessionStorage.removeItem('user_session');

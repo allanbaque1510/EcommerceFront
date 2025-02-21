@@ -7,7 +7,7 @@
       <div class="cont">
 
       <ul class="list-header">
-        <li>Categoria</li>
+        <li (click)="showMyStore()">Mi Tienda</li>
         @if (userInfo !== undefined) {
             <a nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomLeft">
               <nz-avatar nzIcon="user" nzSize="default"  nzSrc=""></nz-avatar>
