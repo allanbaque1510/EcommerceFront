@@ -1,0 +1,71 @@
+<h1>Agregar producto</h1>
+<div class="content">
+    <form nz-form [nzLayout]="'vertical'"  [formGroup]="form">
+        @for (item of dataForm; track $index) {
+            <nz-form-item>
+                <nz-form-label  [nzFor]="item.name">{{item.label}}</nz-form-label>
+                <nz-form-control>
+                    @if (item.input === 'textArea') {
+                        <textarea formControlName={{item.name}} nz-input rows="2"></textarea>
+                    }
+                    @else {
+                        <input 
+                        [type]="item.input"   
+                        nz-input 
+                        formControlName={{item.name}}   
+                        />
+                    }
+            
+                </nz-form-control>
+            </nz-form-item>
+        }
+
+    </form>
+    <div class="image-container">
+        <div class="dragAndDrop">
+            <nz-upload
+                nzType="drag"
+                [nzBeforeUpload]="beforeUpload"
+            >
+                <p class="ant-upload-drag-icon">
+                <nz-icon nzType="inbox" />
+                </p>
+                <p class="ant-upload-text">Sube tus imagenes aqui</p>
+                <p class="ant-upload-hint">
+                    Selecciona o arrastra tus imagenes para subirlas
+                </p>
+            </nz-upload>
+                <nz-modal
+                    [nzVisible]="previewVisible"
+                    [nzContent]="modalContent"
+                    [nzFooter]="null"
+                    (nzOnCancel)="previewVisible = false"
+                    [nzWidth]="'80%'"
+                >
+                    <ng-template  #modalContent>
+                        <img [src]="previewImage" style="width: 100%;max-height: 80vh; object-fit: contain" />
+                    </ng-template>
+                </nz-modal>
+        </div>
+        <div class="carrusel">
+            <nz-image-group>
+                @for (file of fileList; track $index) {
+                    <img
+                    class="fade-in"
+                    (click)="showImage(file)"
+                    [nzDisablePreview]="true"
+                    nz-image
+                    width="150px"
+                    height="150px"
+                    nzSrc={{file}}
+                    />
+                }
+            </nz-image-group>
+        </div>
+    </div>
+</div>
+<div class="boton">
+    <button nz-button nzType="default" nzSize="large">  <nz-icon nzType="clear" /> Limpiar</button>
+    <button nz-button nzType="primary" nzSize="large" (click)="guardarProducto()"> <nz-icon nzType="save"/>  Guardar</button>
+</div>
+

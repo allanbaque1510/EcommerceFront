@@ -2,7 +2,7 @@
     @for (item of products; track $index) {
         <app-card-product 
             [id]="item.id"
-            [img]="item.img"
+            [img]="url+item.img"
             [name]="item.name"
             [description]="item.description"
             [price]="item.price"

@@ -24,7 +24,7 @@ ul li{
     left: 0;
     width: 0%; /* Comienza desde el 0% de ancho */
     height: 0px; /* Establece la altura de la línea */
-    background-color: gray; /* El color de la línea */
+    background-color: rgb(250, 148, 92); /* El color de la línea */
     transition: all 0.2s ease-out; /* Transición de la animación */
   }
 ul li:hover::after {
@@ -36,4 +36,17 @@ ul li:hover::after {
     border: 1px solid rgb(10, 82, 92);
     outline: 1px solid rgb(163, 237, 255);
     padding: 5px 10px ;
+}
+.btn-register{
+    cursor: pointer;
+ 
+    border: none ;
+    border-radius: 10px;
+    background-color: white;
+    color: rgb(250, 148, 92);
+    transition: all ease-out .2s;
+}
+.btn-register:hover{
+    background-color: rgb(250, 148, 92);
+    color: white;
 }

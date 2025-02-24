@@ -1,10 +1,10 @@
-<nz-tabset>
+<nz-tabset nzLinkRouter>
     @for (tab of map_panel; track tab) {
-      <nz-tab [nzTitle]="titleTemplate">
-        <ng-template #titleTemplate>
-          <nz-icon [nzType]="tab.icon" />
+      <nz-tab >
+        <a *nzTabLink nz-tab-link [routerLink]="['.']"   [queryParams]="{ t: code(tab.param) }"  queryParamsHandling="merge">
+          <nz-icon [nzType]="tab.icon"  />
           {{ tab.nombre }}
-        </ng-template>
+        </a>
         <ng-container  [ngComponentOutlet]="tab.component"></ng-container>
     </nz-tab>
     }

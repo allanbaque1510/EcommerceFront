@@ -7,8 +7,8 @@
       <div class="cont">
 
       <ul class="list-header">
-        <li (click)="showMyStore()">Mi Tienda</li>
         @if (userInfo !== undefined) {
+          <li (click)="showMyStore()">Mi Tienda</li>
             <a nz-dropdown [nzDropdownMenu]="menu" nzPlacement="bottomLeft">
               <nz-avatar nzIcon="user" nzSize="default"  nzSrc=""></nz-avatar>
             </a>
@@ -23,6 +23,7 @@
         }
         @else {
           <li (click)="showLogin()">Iniciar sesion</li>
+          <li > <button class="btn-register" [routerLink]="['/register']" >Registrarse</button></li>
         }
         <li>
           <nz-badge [nzCount]="5">

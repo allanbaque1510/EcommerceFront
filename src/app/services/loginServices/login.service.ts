@@ -36,7 +36,7 @@ export class LoginService {
     if (this.csrfTokenLoaded) {
       return of(true); // Si ya se cargó, no volvemos a hacer la petición
     }
-    return this.httpClient.get(`${environment.Url}sanctum/csrf-cookie`, { withCredentials: true }).pipe(
+    return this.httpClient.get(`${environment.Url}/sanctum/csrf-cookie`, { withCredentials: true }).pipe(
       switchMap(() => {
         console.log("Entro al csrfcookie")
         this.csrfTokenLoaded = true;

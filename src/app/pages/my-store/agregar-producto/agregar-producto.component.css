@@ -1,0 +1,53 @@
+form{
+    padding-inline: 10px;
+
+}
+.content{
+    padding: 10px 20px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.image-container{
+    min-width: 250px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.dragAndDrop{
+    flex: 1;
+}
+.carrusel{
+    display: flex;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+.carrusel img{
+    cursor: pointer;
+    margin: 5px 10px;
+    border-radius: 10px;
+    object-fit: contain;
+    -webkit-box-shadow: 0px 0px 27px -9px rgba(199,197,199,0.51);
+-moz-box-shadow: 0px 0px 27px -9px rgba(199,197,199,0.51);
+box-shadow: 0px 0px 27px -9px rgba(199,197,199,0.51);
+}
+.boton{
+    padding: 10px 20px;
+    display: flex;
+    justify-content: flex-start;
+}
+.boton button{
+    margin-inline: 10px;
+}
+
+/* Animación para que las imágenes aparezcan suavemente */
+.fade-in {
+  opacity: 0;
+  animation: fadeInAnimation 1s forwards;
+}
+
+/* Definir el comportamiento de la animación */
+@keyframes fadeInAnimation {
+  to {
+    opacity: 1;
+  }
+}
