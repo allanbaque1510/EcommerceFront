@@ -74,10 +74,7 @@ export class LoginService {
   }
   getUSer() {
     return this.httpClient.get<any>(`${this.Url}user`,{ withCredentials: true })
-    .pipe(
-      catchError(error => {
-        return this.handleError(error);
-      }))
+    .pipe(catchError(this.handleError))
     .subscribe(x=>{
       this.saveSession(x.data)
     })

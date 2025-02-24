@@ -49,6 +49,11 @@ export class AgregarProductoComponent {
     this.previewImage=file
   }
   beforeUpload = (file: NzUploadFile): boolean => {
+    const isImage = file.type && file.type.startsWith('image/');
+    if (!isImage) {
+      console.error('Solo se permiten imágenes');
+      return false;
+    }
     const myReader = new FileReader();
     myReader.readAsDataURL(file as any);
     myReader.onloadend = (e) => {
