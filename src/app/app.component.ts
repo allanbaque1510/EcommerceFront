@@ -7,10 +7,11 @@ import { LoginService } from './services/loginServices/login.service';
 import { user } from './interfaces/user';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
-import { environment } from '../environments/environment';
+import { LoadingComponent } from './utils/loading/loading.component';
+import { ModalResponseComponent } from './utils/modal-response/modal-response.component';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,NzIconModule,NzBadgeModule,LoginComponent,NzAvatarModule,NzDropDownModule,RouterModule],
+  imports: [RouterOutlet,NzIconModule,NzBadgeModule,LoginComponent,NzAvatarModule,NzDropDownModule,RouterModule, LoadingComponent, ModalResponseComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

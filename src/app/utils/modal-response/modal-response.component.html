@@ -1,0 +1,13 @@
+<nz-modal [(nzVisible)]="isVisible" [nzFooter]="null" nzTitle="" nzClosable="false">
+    <ng-container *nzModalContent>
+        <nz-result
+        [nzStatus]="infoModal.status"
+        [nzTitle]="infoModal.title"
+        [nzSubTitle]="infoModal.description"
+      >
+        <div nz-result-extra>
+          <button nz-button nzType="primary" (click)="handleOk(infoModal.onOK)">Aceptar</button>
+        </div>
+      </nz-result>
+    </ng-container>
+  </nz-modal>
