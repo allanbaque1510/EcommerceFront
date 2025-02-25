@@ -15,10 +15,10 @@ export const authGuard: CanActivateFn = async (route, state) => {
 
   try {
     await loginService.verificar().toPromise(); // Espera la respuesta
-    return true;
   } catch (error) {
     loginService.deleteAllCookies()
     loginService.clearSession();
     return false;
   }
+  return true;
 };
