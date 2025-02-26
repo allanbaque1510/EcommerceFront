@@ -10,6 +10,7 @@ import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { InventarioService } from '../../../services/inventario.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ModalResponseService } from '../../../services/modal-response.service';
+import { LoadingService } from '../../../services/loading.service';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -31,7 +32,7 @@ export class AgregarProductoComponent {
     {label:"Cantidad", name:"cantidad", input:"number", require:true},
     {label:"Precio", name:"precio", input:"number", require:true},
   ]
-  constructor(private fb:FormBuilder, private inventarioService:InventarioService,private notification: NzNotificationService, private modalResponseService:ModalResponseService){
+  constructor(private fb:FormBuilder, private loadingService:LoadingService,private inventarioService:InventarioService,private notification: NzNotificationService, private modalResponseService:ModalResponseService){
    this.form = this.createForm();
   }
 
@@ -39,7 +40,7 @@ export class AgregarProductoComponent {
     const formControls = this.dataForm.reduce((acc, field) => {
       const validators = [];
       if (field.require) validators.push(Validators.required);
-      acc[field.name] = this.fb.control('', validators);
+      acc[field.name] = this.fb.control(null, validators);
       return acc;
     }, {} as { [key: string]: AbstractControl });
 
@@ -52,7 +53,11 @@ export class AgregarProductoComponent {
   beforeUpload = (file: NzUploadFile): boolean => {
     const isImage = file.type && file.type.startsWith('image/');
     if (!isImage) {
-      console.error('Solo se permiten imágenes');
+      this.modalResponseService.setModalResponse={
+        status:'error',
+        title:"Error al agregar el archivo",
+        description:'Solo se permiten imagenes'
+      }
       return false;
     }
     const myReader = new FileReader();
@@ -64,9 +69,8 @@ export class AgregarProductoComponent {
   }
   guardarProducto(){
     const valores = this.form.value;
-
     this.dataForm.map((x:inputModel)=>{
-      if(x.require && valores[x.name].length < 1){
+      if(x.require && valores[x.name] === null){
         this.notificaciones.push({title:x.label, description:"El campo no puede estar vacio"})
       }else if(x.minLength !== undefined && x.minLength > valores[x.name].length){
         this.notificaciones.push({title:x.label, description:`La longitud minima del campo es de ${x.minLength} caracteres`})
@@ -91,15 +95,28 @@ export class AgregarProductoComponent {
   }
 
   uploadData(formulario:any){
+    this.loadingService.loadingOn();
     this.inventarioService.upload({...formulario, imagenes:this.fileList}).subscribe({
       next:(x)=>{
-        this.modalResponseService.setModalResponse={status:'success',title:"Producto agregado",description:"El producto se agrego correctamente"}
+        this.modalResponseService.setModalResponse={
+          status:'success',
+          title:"Producto agregado",
+          description:"El producto se agrego correctamente",
+          onOK:()=>{
+            this.form.reset();
+            this.fileList = [];
+          }
+        }
       },
       error:(error)=>{
-        this.modalResponseService.setModalResponse={status:'error',title:"Error al agregar el producto",description:error}
+        this.modalResponseService.setModalResponse={
+          status:'error',
+          title:"Error al agregar el producto",
+          description:error
+        }
       },
       complete:()=>{
-
+        this.loadingService.loadingOff();
       }
     })
 

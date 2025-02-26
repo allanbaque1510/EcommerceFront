@@ -20,4 +20,7 @@ export class InventarioService {
     return this.httpClient.post<any>(`${this.ApiUrl}upload_product`,product,{ withCredentials: true })
     .pipe(catchError(this.handleError))
   }
+  getProducts(){
+    return this.httpClient.get<any>(`${this.ApiUrl}get_products_user`,{ withCredentials: true }).pipe(catchError(this.handleError))
+  }
 }
