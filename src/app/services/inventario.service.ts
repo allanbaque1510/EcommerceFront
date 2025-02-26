@@ -19,6 +19,5 @@ export class InventarioService {
   upload(product:any){
     return this.httpClient.post<any>(`${this.ApiUrl}upload_product`,product,{ withCredentials: true })
     .pipe(catchError(this.handleError))
-    .subscribe(x=>console.log(x))
   }
 }

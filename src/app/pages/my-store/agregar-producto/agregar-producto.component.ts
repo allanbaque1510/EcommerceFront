@@ -9,6 +9,7 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzUploadFile, NzUploadModule } from 'ng-zorro-antd/upload';
 import { InventarioService } from '../../../services/inventario.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { ModalResponseService } from '../../../services/modal-response.service';
 
 @Component({
   selector: 'app-agregar-producto',
@@ -30,7 +31,7 @@ export class AgregarProductoComponent {
     {label:"Cantidad", name:"cantidad", input:"number", require:true},
     {label:"Precio", name:"precio", input:"number", require:true},
   ]
-  constructor(private fb:FormBuilder, private inventarioService:InventarioService,private notification: NzNotificationService){
+  constructor(private fb:FormBuilder, private inventarioService:InventarioService,private notification: NzNotificationService, private modalResponseService:ModalResponseService){
    this.form = this.createForm();
   }
 
@@ -49,6 +50,11 @@ export class AgregarProductoComponent {
     this.previewImage=file
   }
   beforeUpload = (file: NzUploadFile): boolean => {
+    const isImage = file.type && file.type.startsWith('image/');
+    if (!isImage) {
+      console.error('Solo se permiten imágenes');
+      return false;
+    }
     const myReader = new FileReader();
     myReader.readAsDataURL(file as any);
     myReader.onloadend = (e) => {
@@ -79,9 +85,24 @@ export class AgregarProductoComponent {
         );
       });
     }else{
-      this.inventarioService.upload({...valores, imagenes:this.fileList})
+      this.uploadData(valores);
     }
     this.notificaciones =[];
+  }
+
+  uploadData(formulario:any){
+    this.inventarioService.upload({...formulario, imagenes:this.fileList}).subscribe({
+      next:(x)=>{
+        this.modalResponseService.setModalResponse={status:'success',title:"Producto agregado",description:"El producto se agrego correctamente"}
+      },
+      error:(error)=>{
+        this.modalResponseService.setModalResponse={status:'error',title:"Error al agregar el producto",description:error}
+      },
+      complete:()=>{
+
+      }
+    })
+
   }
 
 }

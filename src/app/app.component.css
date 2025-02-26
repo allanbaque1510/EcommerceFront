@@ -50,3 +50,6 @@ ul li:hover::after {
     background-color: rgb(250, 148, 92);
     color: white;
 }
+main{
+    position: relative;
+}
