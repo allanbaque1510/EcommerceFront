@@ -12,6 +12,9 @@ export class LoadingService {
   loadingOn(){
     this.statusLoading.next(true);
   }
+  get isLoading(){
+    return this.statusLoading.getValue();
+  }
   loadingOff(){
     this.statusLoading.next(false);
   }

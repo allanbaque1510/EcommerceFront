@@ -11,20 +11,37 @@
         <th>Descripcion</th>
         <th>Precio</th>
         <th>Stock</th>
+        <th>Imagen</th>
+        <th nzAlign = "center">Acciones</th>
       </tr>
     </thead>
     <tbody>
-        @for (data of basicTable.data; track $index) {
-            <tr >
-                <td>{{data.name}}</td>
-                <td>{{data.description}}</td>
-                <td>${{data.price}}</td>
-                <td>{{data.inStock}}</td>
-                <td><img nz-image nzSrc={{url+(data.img)}} height="50px" width="50px" alt=""></td>
-                <td>
-                    <a>Action 一 {{data.name}}</a>
-                </td>
+        @if (loadinService.isLoading) {
+            <tr>
+                <td><nz-skeleton  [nzActive]="true"></nz-skeleton></td>
+                <td><nz-skeleton  [nzActive]="true"></nz-skeleton></td>
+                <td><nz-skeleton  [nzActive]="true"></nz-skeleton></td>
+                <td><nz-skeleton  [nzActive]="true"></nz-skeleton></td>
+                <td><nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element></td>
+                <td><nz-skeleton  [nzActive]="true"></nz-skeleton></td>
             </tr>
+        }
+        @else {
+
+            @for (data of basicTable.data; track $index) {
+                <tr >
+                    <td>{{data.name}}</td>
+                    <td>{{data.description}}</td>
+                    <td>${{data.price}}</td>
+                    <td>{{data.inStock}}</td>
+                    <td><img nz-image nzSrc={{url+(data.img)}} height="50px" width="50px" alt=""></td>
+                    <td nz-row-actions nzAlign="center" class="content-acttion">
+                        <nz-icon class="editar" nz-tooltip nzTooltipTitle="Editar producto" nzType="edit" nzTheme="outline" />
+                        <nz-divider nzType="vertical"></nz-divider>
+                        <nz-icon class="eliminar" nz-tooltip nzTooltipTitle="Eliminar producto" nzType="delete" nzTheme="outline" />
+                    </td>
+                </tr>
+            }
         }
     </tbody>
   </nz-table>
