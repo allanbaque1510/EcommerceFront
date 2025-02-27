@@ -16,11 +16,15 @@ export class InventarioService {
     return throwError(error.error.message);
   }
 
-  upload(product:any){
-    return this.httpClient.post<any>(`${this.ApiUrl}upload_product`,product,{ withCredentials: true })
+  create(product:any){
+    return this.httpClient.post<any>(`${this.ApiUrl}inventario/create`,product,{ withCredentials: true })
     .pipe(catchError(this.handleError))
   }
   getProducts(){
-    return this.httpClient.get<any>(`${this.ApiUrl}get_products_user`,{ withCredentials: true }).pipe(catchError(this.handleError))
+    return this.httpClient.get<any>(`${this.ApiUrl}inventario/get`,{ withCredentials: true }).pipe(catchError(this.handleError))
+  }
+  
+  deleteProducts(id:number){
+    return this.httpClient.delete<any>(`${this.ApiUrl}inventario/delete/${id}`,{ withCredentials: true }).pipe(catchError(this.handleError))
   }
 }

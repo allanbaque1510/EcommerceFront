@@ -3,6 +3,7 @@ import { CardProductComponent } from '../../components/card-product/card-product
 import { Product } from '../../interfaces/product';
 import { ProductsService } from '../../services/products.service';
 import { environment } from '../../../environments/environment';
+import { LoadingService } from '../../services/loading.service';
 @Component({
   selector: 'app-index',
   imports: [CardProductComponent],
@@ -13,21 +14,19 @@ import { environment } from '../../../environments/environment';
 export class IndexComponent {
   products: Product[]= [];
   url:string = environment.Url
-  constructor(private productService:ProductsService){
-    productService.getProducts().subscribe(
-      (data: Product[]) => {
-        this.products = data; // Asignamos los productos a la variable
-      },
-      (error) => {
-        console.error(error); // Imprime el error
-      }
-    );
+
+  constructor(private productService:ProductsService, private loadinService:LoadingService){
+    loadinService.loadingOn()
+    this.productService.getProducts().subscribe({
+      next:(data:Product[])=>{this.products = data},
+      error:err=>console.error(err),
+      complete:()=>this.loadinService.loadingOff()
+    });
   }
-  // products: Product[]= [
-  //     {id:1,name:"Vestido de seda",description:"Ropa elegante de mujer",inStock:true,price:10.23,img:"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"},
-  //     {id:2,name:"Vestido de seda2",description:"Ropa elegante de mujer1",inStock:true,price:13.03,img:"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"},
-  //     {id:3,name:"Vestido de seda3",description:"Ropa elegante de mujer2",inStock:true,price:5.22,img:"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"},
-  //     {id:4,name:"Vestido de seda4",description:"Ropa elegante de mujer3",inStock:true,price:1,img:"https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png"},
-  //   ]
+
+  GenerarArray(int:number){
+    return Array.from({ length: int }, (_, i) => i + 1);
+  }
+
   
 }

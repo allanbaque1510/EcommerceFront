@@ -1,11 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { NzCardModule } from 'ng-zorro-antd/card';
-import { NzSkeletonModule } from 'ng-zorro-antd/skeleton';
 import { ProductsService } from '../../services/products.service';
 
 @Component({
   selector: 'app-card-product',
-  imports: [NzCardModule,NzSkeletonModule],
+  imports: [NzCardModule],
   templateUrl: './card-product.component.html',
   styleUrl: './card-product.component.css'
 })

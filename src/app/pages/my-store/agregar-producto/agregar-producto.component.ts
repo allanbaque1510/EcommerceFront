@@ -96,7 +96,7 @@ export class AgregarProductoComponent {
 
   uploadData(formulario:any){
     this.loadingService.loadingOn();
-    this.inventarioService.upload({...formulario, imagenes:this.fileList}).subscribe({
+    this.inventarioService.create({...formulario, imagenes:this.fileList}).subscribe({
       next:(x)=>{
         this.modalResponseService.setModalResponse={
           status:'success',
