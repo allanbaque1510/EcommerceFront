@@ -1,9 +1,11 @@
-<nz-card nzHoverable style="width:240px; margin: 10px 8px;" [nzCover]="coverTemplate" [nzActions]="[aggCarrito]">
-    <nz-card-meta 
-        nzTitle={{name}} 
-        nzDescription={{description}}
-    />
-</nz-card>
+<div class="animation" style="top: -30px;">
+    <nz-card nzHoverable style="width:240px; margin: 10px 8px;" [nzCover]="coverTemplate" [nzActions]="[aggCarrito]">
+        <nz-card-meta 
+        [nzTitle]="'$'+price" 
+        nzDescription={{name}}
+        />
+    </nz-card>
+</div>
 <ng-template #coverTemplate>
     <div class="cover-container">
         <!-- <nz-skeleton-element nzType="image" [nzActive]="true"></nz-skeleton-element> -->

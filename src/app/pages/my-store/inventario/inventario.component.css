@@ -6,3 +6,8 @@
     color:red;
     margin-inline: 5px;
 }
+.content-header{
+    display: flex;
+    justify-content: end;
+    margin-block: 10px;
+}

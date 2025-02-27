@@ -4,7 +4,7 @@ import {  RouterModule } from '@angular/router';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzTableModule, NzTableSortFn, NzTableSortOrder } from 'ng-zorro-antd/table';
 import { InventarioService } from '../../../services/inventario.service';
 import { LoadingService } from '../../../services/loading.service';
 import { ModalResponseService } from '../../../services/modal-response.service';
@@ -27,6 +27,7 @@ export class InventarioComponent {
     form!:FormGroup;
     dataSet: Product[] = [];
     url:string = environment.Url
+    isChargerData = false;
     constructor(private fb:FormBuilder,private modalService:ModalResponseService, private inventarioService:InventarioService, public loadinService:LoadingService){
       this.form = fb.group({
           search: fb.control(''),
@@ -35,10 +36,21 @@ export class InventarioComponent {
       this.inventarioService.getProducts().subscribe({
         next:(data)=>{this.dataSet = data.data},
         error:err=>this.modalService.setModalResponse={status:'error',title:"Error al obtener datos",description:err},
+        complete:()=>{this.loadinService.loadingOff();this.isChargerData = true}
+      })
+    }
+    compare(a:Product,b:Product){
+      return a.name.localeCompare(b.name)
+    }
+    deleteProduct(id:number){
+      this.loadinService.loadingOn()
+      this.inventarioService.deleteProducts(id).subscribe({
+        next:()=>this.modalService.setModalResponse={status:'success',title:"Producto eliminado",description:"El producto se elimino correctamente", onOK:this.filterData.bind(this,id)},
+        error:err=>this.modalService.setModalResponse={status:'error',title:"Error al eliminar el producto",description:err},
         complete:()=>this.loadinService.loadingOff()
       })
     }
-    submitForm(){
-
+    filterData(id:number){
+      this.dataSet = this.dataSet.filter(x=>x.id!==id)
     }
 }
