@@ -1,8 +1,10 @@
 .editar{
+    cursor: pointer;
     color: rgb(48, 224, 17);
     margin-inline: 5px;
 }
 .eliminar{
+    cursor: pointer;
     color:red;
     margin-inline: 5px;
 }

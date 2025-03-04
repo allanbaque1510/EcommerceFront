@@ -1,11 +1,13 @@
 <div class="product-container">
         @for (item of products; track $index) {
-            <app-card-product 
+            <app-card-product
             [id]="item.id"
             [img]="url+item.img"
             [name]="item.name"
             [price]="item.price"
             [stock]="item.inStock"
+            [description]="item.description"
+            [animationDelay]="$index * 0.1"
             />
         }
 </div>

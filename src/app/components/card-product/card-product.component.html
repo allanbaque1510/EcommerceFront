@@ -1,9 +1,12 @@
-<div class="animation" style="top: -30px;">
+<div class="animation" [ngStyle]="{'--animation-delay': animationDelay + 's'}" style="top: -30px;">
     <nz-card nzHoverable style="width:240px; margin: 10px 8px;" [nzCover]="coverTemplate" [nzActions]="[aggCarrito]">
         <nz-card-meta 
-        [nzTitle]="'$'+price" 
-        nzDescription={{name}}
+        nzTitle={{name}}
+        nzDescription={{description}}
         />
+        <span class="price">
+            {{utilService.formatPrice(price)}} 
+        </span>
     </nz-card>
 </div>
 <ng-template #coverTemplate>

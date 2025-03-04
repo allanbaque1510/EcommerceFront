@@ -22,7 +22,6 @@ export class ModalResponseService {
   }
   closeModal(){
     this.statusModal.next(false)
-    this.dataModal.next({status:this.dataModal.getValue().status,title:'',description:''})
   }
 }
 

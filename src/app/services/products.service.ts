@@ -26,7 +26,6 @@ export class ProductsService {
   saveProduct(product:any){
     return this.httpClient.post<any>(`${this.ApiUrl}save_product`,product,{ withCredentials: true })
     .pipe(catchError(this.handleError))
-    .subscribe(x=>console.log(x))
   }
 }
 interface response{

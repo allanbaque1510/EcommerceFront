@@ -93,7 +93,10 @@ export class AgregarProductoComponent {
     }
     this.notificaciones =[];
   }
-
+  limpiar(){
+    this.form.reset();
+    this.fileList = [];
+  }
   uploadData(formulario:any){
     this.loadingService.loadingOn();
     this.inventarioService.create({...formulario, imagenes:this.fileList}).subscribe({
